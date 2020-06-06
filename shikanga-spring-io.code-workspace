@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "webflux-demo"
+		},
+		{
+			"path": "aws-image-upload"
+		}
+	],
+	"settings": {}
+}
