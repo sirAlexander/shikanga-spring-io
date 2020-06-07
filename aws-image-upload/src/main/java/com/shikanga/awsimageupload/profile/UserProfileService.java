@@ -58,6 +58,17 @@ public class UserProfileService {
         }
     }
 
+    public byte[] downloadUserProfileImage(UUID userProfileId) {
+        UserProfile userProfile = getUserProfileOrThrow(userProfileId);
+        String path = String.format("%s/%s",
+                BucketName.PROFILE_IMAGE.getBucketName(),
+                userProfile.getUserProfileId());
+
+        return userProfile.getUserProfileImageLink()
+                .map(key -> fileStore.download(path, key))
+                .orElse(new byte[0]);
+    }
+
     private Map<String, String> extractMetadata(MultipartFile file) {
         Map<String, String> metadata = new HashMap<>();
         metadata.put("Content-Type", file.getContentType());
@@ -84,4 +95,5 @@ public class UserProfileService {
             throw new IllegalStateException("Cannot upload empty file [ " + file.getSize() + "]");
         }
     }
+
 }
