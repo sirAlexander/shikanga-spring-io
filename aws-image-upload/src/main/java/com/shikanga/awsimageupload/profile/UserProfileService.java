@@ -52,6 +52,7 @@ public class UserProfileService {
         String fileName = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
         try {
             fileStore.save(path, fileName, Optional.of(metadata), file.getInputStream());
+            userProfile.setUserProfileImageLink(fileName);
         } catch (IOException e) {
             throw new IllegalStateException();
         }
