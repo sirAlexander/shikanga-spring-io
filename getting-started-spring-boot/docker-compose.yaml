@@ -1,0 +1,16 @@
+version: "3"
+
+volumes:
+  amigos_postgres_data:
+
+services:
+  database:
+    image: "postgres:13.2"
+    environment:
+      POSTGRES_PASSWORD: "postgrespassword"
+    container_name: "amigos-spring-boot-starter"
+    ports:
+      - "54321:5432"
+    volumes:
+      - ./db-init/initialize-databases.sql:/docker-entrypoint-initdb.d/init.sql
+      - amigos_postgres_data:/var/lib/postgresql/data
