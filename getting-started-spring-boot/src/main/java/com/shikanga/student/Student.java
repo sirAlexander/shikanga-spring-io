@@ -87,7 +87,7 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", dob=" + dob +
-                ", age=" + age +
+                ", age=" + getAge() +
                 '}';
     }
 }
