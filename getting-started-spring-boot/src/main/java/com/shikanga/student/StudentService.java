@@ -20,6 +20,10 @@ public class StudentService {
     }
 
     public void addNewStudent(Student student) {
-        System.out.println(student);
+        studentRepository.findStudentByEmail(student.getEmail())
+                .ifPresent(existingStudent -> {
+                    throw new IllegalStateException("email taken");
+                });
+        studentRepository.save(student);
     }
 }
