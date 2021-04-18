@@ -28,8 +28,15 @@ public class StudentController {
 
     @PutMapping(path = "{studentId}")
     public void updateStudent(@PathVariable("studentId") Long studentId,
-                              @RequestBody Student student){
+                              @RequestBody Student student) {
         studentService.updateStudent(studentId, student);
+    }
+
+    @PutMapping(path = "/alternative/{studentId}")
+    public void alternativeUpdateStudent(@PathVariable("studentId") Long studentId,
+                                         @RequestParam(required = false) String name,
+                                         @RequestParam(required = false) String email) {
+        studentService.alternativeUpdateStudent(studentId, name, email);
     }
 
     @DeleteMapping(path = "{studentId}")
