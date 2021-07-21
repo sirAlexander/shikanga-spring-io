@@ -1,5 +1,8 @@
 package learnk8s.io.knotejava;
 
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,8 @@ import java.util.List;
 public class KnoteController {
 
     private final NotesRepository notesRepository;
+    private Parser parser = Parser.builder().build();
+    private HtmlRenderer renderer = HtmlRenderer.builder().build();
 
     public KnoteController(NotesRepository notesRepository) {
         this.notesRepository = notesRepository;
@@ -50,7 +55,10 @@ public class KnoteController {
 
     private void saveNote(String description, Model model) {
         if (description != null && !description.trim().isEmpty()) {
-            notesRepository.save(new Note(null, description.trim()));
+            //You need to translate markup to HTML
+            Node document = parser.parse(description.trim());
+            String html = renderer.render(document);
+            notesRepository.save(new Note(null, html));
             //After publish you need to clean up the textarea
             model.addAttribute("description", "");
         }
