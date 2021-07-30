@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jdk-11.0.2.9-slim
+FROM arm64v8/openjdk:11.0.12-jdk-slim
 WORKDIR /opt
 ENV PORT 8080
 EXPOSE 8080
