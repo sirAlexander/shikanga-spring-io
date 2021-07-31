@@ -18,8 +18,11 @@ This application has three components:
 </dependency>
 ```
 
-- docker pull webcenter/activemq:5.14.3
-- docker run -p 61616:61616 -p 8161:8161 webcenter/activemq:5.14.3
+```
+docker pull webcenter/activemq:5.14.3
+
+docker run -p 61616:61616 -p 8161:8161 webcenter/activemq:5.14.3
+```
 
 - http://localhost:8161/admin
 
@@ -33,4 +36,12 @@ docker tag horizontal-pod-autoscalar siralexander/horizontal-pod-autoscalar-arm6
 
 ```shell
 docker push siralexander/horizontal-pod-autoscalar-arm64:1.0.0
+```
+
+```shell
+kubectl --kubeconfig ~/tools/pi-cluster/k3s/k3s.yaml apply -f k8s/activemq-arm64-deployment.yaml
+```
+
+```shell
+kubectl --kubeconfig ~/tools/pi-cluster/k3s/k3s.yaml get pods -l=app=queue --watch
 ```
