@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 
+    private final QueueService queueService;
+
     @Value("${queue.name}")
     private String queueName;
 
@@ -22,6 +24,10 @@ public class HelloController {
 
     @Value("${worker.enabled}")
     private boolean workerEnabled;
+
+    public HelloController(QueueService queueService) {
+        this.queueService = queueService;
+    }
 
     @GetMapping("/")
     public String home(Model model){
@@ -36,7 +42,11 @@ public class HelloController {
     @RequestMapping(value = "/health")
     public ResponseEntity health() {
         HttpStatus status;
-        status = HttpStatus.OK;
+        if(queueService.isUp()){
+            status = HttpStatus.OK;
+        } else {
+            status = HttpStatus.BAD_REQUEST;
+        }
         return new ResponseEntity(status);
     }
 }
