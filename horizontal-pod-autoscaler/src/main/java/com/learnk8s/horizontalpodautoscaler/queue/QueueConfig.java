@@ -14,6 +14,9 @@ public class QueueConfig {
     @Value("${activemq.brokerUrl}")
     private String brokerUrl;
 
+    @Value("${activemq.concurrency}")
+    private String concurrency;
+
     @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
@@ -26,7 +29,7 @@ public class QueueConfig {
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(activeMQConnectionFactory());
-        factory.setConcurrency("1");
+        factory.setConcurrency(concurrency);
         return factory;
     }
 
