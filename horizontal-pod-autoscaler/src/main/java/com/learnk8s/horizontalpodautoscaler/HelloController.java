@@ -6,7 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.UUID;
 
 @Controller
 public class HelloController {
@@ -41,6 +45,15 @@ public class HelloController {
         model.addAttribute("isStoreEnabled", this.storeEnabled);
         model.addAttribute("isWorkerEnabled", this.workerEnabled);
         return "home";
+    }
+
+    @PostMapping("/submit")
+    public String submit(@ModelAttribute Ticket ticket) {
+        for (long i = 0; i < ticket.getQuantity(); i++) {
+            String id = UUID.randomUUID().toString();
+            queueService.send(queueName, id);
+        }
+        return "success";
     }
 
     @RequestMapping(value = "/health")

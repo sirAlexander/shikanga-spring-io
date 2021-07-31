@@ -36,6 +36,11 @@ public class QueueService implements MessageListener {
         return false;
     }
 
+    public void send(String destination, String message) {
+        LOGGER.info("sending message='{}' to destination='{}'", message, destination);
+        jmsTemplate.convertAndSend(destination, message);
+    }
+
     public int pendingJobs(String queueName) {
         return jmsTemplate.browse(
                 queueName,
@@ -66,4 +71,6 @@ public class QueueService implements MessageListener {
         }
 
     }
+
+
 }
