@@ -31,7 +31,10 @@ public class HelloController {
 
     @GetMapping("/")
     public String home(Model model){
+        int pendingMessages = queueService.pendingJobs(queueName);
         model.addAttribute("ticket", new Ticket());
+        model.addAttribute("pendingJobs", pendingMessages);
+        model.addAttribute("isConnected", queueService.isUp() ? "yes" : "no");
         model.addAttribute("queueName", this.queueName);
         model.addAttribute("workerName", this.workerName);
         model.addAttribute("isStoreEnabled", this.storeEnabled);
