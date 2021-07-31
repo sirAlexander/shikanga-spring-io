@@ -11,6 +11,8 @@ public class QueueService {
 
     private final JmsTemplate jmsTemplate;
 
+    private int counter = 0;
+
     public QueueService(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
     }
@@ -32,5 +34,9 @@ public class QueueService {
                 queueName,
                 (s, queueBrowser) -> Collections.list(queueBrowser.getEnumeration()).size()
         );
+    }
+
+    public int completedJobs() {
+        return counter;
     }
 }

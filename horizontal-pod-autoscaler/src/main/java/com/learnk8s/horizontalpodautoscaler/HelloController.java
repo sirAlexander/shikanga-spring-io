@@ -34,6 +34,7 @@ public class HelloController {
         int pendingMessages = queueService.pendingJobs(queueName);
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("pendingJobs", pendingMessages);
+        model.addAttribute("completedJobs", queueService.completedJobs());
         model.addAttribute("isConnected", queueService.isUp() ? "yes" : "no");
         model.addAttribute("queueName", this.queueName);
         model.addAttribute("workerName", this.workerName);
