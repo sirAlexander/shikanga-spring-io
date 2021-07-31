@@ -1,5 +1,6 @@
 package com.learnk8s.horizontalpodautoscaler;
 
+import com.learnk8s.horizontalpodautoscaler.queue.QueueService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

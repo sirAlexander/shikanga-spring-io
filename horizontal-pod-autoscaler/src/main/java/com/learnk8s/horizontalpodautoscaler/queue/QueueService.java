@@ -1,4 +1,4 @@
-package com.learnk8s.horizontalpodautoscaler;
+package com.learnk8s.horizontalpodautoscaler.queue;
 
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.slf4j.Logger;
@@ -28,6 +28,7 @@ public class QueueService implements MessageListener {
     public boolean isUp() {
         var connection = jmsTemplate.getConnectionFactory();
         try {
+            assert connection != null;
             connection.createConnection().close();
             return true;
         } catch (JMSException e) {
