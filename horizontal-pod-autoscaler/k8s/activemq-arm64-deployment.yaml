@@ -30,7 +30,14 @@ metadata:
   namespace: horizontal-pod-autoscaler
 spec:
   ports:
-    - port: 61616
+    - name: openwire
+      port: 61616
       targetPort: 61616
+      protocol: TCP
+    - name: dashboard
+      port: 8161
+      targetPort: 8161
+      protocol: TCP
   selector:
     app: queue
+  type: LoadBalancer
