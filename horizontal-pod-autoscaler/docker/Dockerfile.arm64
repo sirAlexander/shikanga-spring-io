@@ -1,0 +1,8 @@
+FROM arm64v8/openjdk:11.0.12-jdk-slim
+WORKDIR /opt
+EXPOSE 8080
+ENV PORT 8080
+ENV STORE_ENABLED=true
+ENV WORKER_ENABLED=true
+COPY target/*.jar /opt/app.jar
+ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
