@@ -30,7 +30,7 @@ public class QueueService implements MessageListener {
         try {
             connection.createConnection().close();
             return true;
-        } catch (JMSException e){
+        } catch (JMSException e) {
             e.printStackTrace();
         }
         return false;

@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -34,7 +31,7 @@ public class HelloController {
     }
 
     @GetMapping("/")
-    public String home(Model model){
+    public String home(Model model) {
         int pendingMessages = queueService.pendingJobs(queueName);
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("pendingJobs", pendingMessages);
@@ -56,10 +53,20 @@ public class HelloController {
         return "success";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/metrics", produces = "text/plain")
+    public String metrics() {
+        int totalMessages = queueService.pendingJobs(queueName);
+        return "# HELP messages Number of messages in the queueService\n"
+                + "# TYPE messages gauge\n"
+                + "messages " + totalMessages;
+    }
+
+
     @RequestMapping(value = "/health")
     public ResponseEntity health() {
         HttpStatus status;
-        if(queueService.isUp()){
+        if (queueService.isUp()) {
             status = HttpStatus.OK;
         } else {
             status = HttpStatus.BAD_REQUEST;
