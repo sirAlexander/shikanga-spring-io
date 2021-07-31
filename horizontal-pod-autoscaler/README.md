@@ -39,9 +39,14 @@ docker push siralexander/horizontal-pod-autoscalar-arm64:1.0.0
 ```
 
 ```shell
-kubectl --kubeconfig ~/tools/pi-cluster/k3s/k3s.yaml apply -f k8s/activemq-arm64-deployment.yaml
+kubectl --kubeconfig ~/tools/pi-cluster/k3s/k3s.yaml create ns horizontal-pod-autoscaler
+```
+```shell
+kubectl --kubeconfig ~/tools/pi-cluster/k3s/k3s.yaml apply -f k8s/
 ```
 
 ```shell
 kubectl --kubeconfig ~/tools/pi-cluster/k3s/k3s.yaml get pods -l=app=queue --watch
 ```
+
+Scaling manually to meet increasing demand
