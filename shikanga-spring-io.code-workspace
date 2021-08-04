@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "aws-image-upload"
+		},
+		{
+			"path": "horizontal-pod-autoscaler"
 		}
 	],
 	"settings": {}
