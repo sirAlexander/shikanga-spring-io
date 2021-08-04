@@ -10,6 +10,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class QueueService implements MessageListener {
@@ -18,7 +19,7 @@ public class QueueService implements MessageListener {
 
     private final JmsTemplate jmsTemplate;
 
-    private int counter = 0;
+    private AtomicInteger counter;
 
     public QueueService(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
@@ -50,7 +51,7 @@ public class QueueService implements MessageListener {
     }
 
     public int completedJobs() {
-        return counter;
+        return counter.get();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class QueueService implements MessageListener {
             } catch (JMSException e) {
                 e.printStackTrace();
             }
-            counter++;
+            counter.incrementAndGet();
         } else {
             LOGGER.error("Message is not a text message " + message.toString());
         }
