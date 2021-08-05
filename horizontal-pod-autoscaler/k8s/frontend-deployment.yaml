@@ -45,8 +45,25 @@ metadata:
   namespace: horizontal-pod-autoscaler
 spec:
   ports:
-    - port: 8070
+    - name: frontend-web
+      port: 8070
       targetPort: 8080
   selector:
     app: frontend
   type: LoadBalancer
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: frontend
+  namespace: horizontal-pod-autoscaler
+#  annotations:
+#    key: string
+#  labels:
+#    key: string
+spec: #.spec
+  selector:
+    matchLabels:
+      app: frontend
+  endpoints:
+  - port: frontend-web
