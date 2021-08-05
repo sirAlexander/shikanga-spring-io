@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
+import java.util.stream.LongStream;
 
 @Controller
 public class HelloController {
@@ -47,10 +48,12 @@ public class HelloController {
 
     @PostMapping("/submit")
     public String submit(@ModelAttribute Ticket ticket) {
-        for (long i = 0; i < ticket.getQuantity(); i++) {
-            String id = UUID.randomUUID().toString();
-            queueService.send(queueName, id);
-        }
+
+        LongStream.rangeClosed(1, ticket.getQuantity())
+                .forEach(i -> {
+                    String id = UUID.randomUUID().toString();
+                    queueService.send(queueName, id);
+                });
         return "success";
     }
 
