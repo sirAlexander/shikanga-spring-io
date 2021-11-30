@@ -1,6 +1,7 @@
 package com.in28minutes.rest.webservices.restfulwebservices.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,21 +20,30 @@ public class UserResource {
     }
 
     @GetMapping("/users")
-    public List<User> retrieveAllUsers(){
+    public List<User> retrieveAllUsers() {
         return userDaoService.findAll();
     }
 
     @GetMapping("/users/{id}")
-    public User retrieveUser(@PathVariable int id){
+    public User retrieveUser(@PathVariable int id) {
         final User user = userDaoService.findOne(id);
-        if(user == null ){
+        if (user == null) {
             throw new UserNotFoundException("id-" + id);
         }
         return user;
     }
 
+    @DeleteMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@PathVariable int id) {
+
+        if (!userDaoService.deleteById(id)) {
+            throw new UserNotFoundException("id-" + id);
+        }
+    }
+
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@RequestBody User user) {
 
         final User savedUser = userDaoService.saveUser(user);
 
