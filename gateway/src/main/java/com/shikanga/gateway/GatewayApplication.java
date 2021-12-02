@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class GatewayApplication {
 
+	private static final String HTTP_BIN_BASE_URL = "http://httpbin.org:80";
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
@@ -19,7 +22,13 @@ public class GatewayApplication {
 				.route(p -> p
 						.path("/get")
 						.filters(f -> f.addRequestHeader("Hello", "World"))
-						.uri("http://httpbin.org:80"))
+						.uri(HTTP_BIN_BASE_URL))
+				.route(p -> p
+						.host("*.circuitbreaker.com")
+						.filters(f -> f.circuitBreaker(
+								config -> config.setName("mycmd"))
+								)
+						.uri(HTTP_BIN_BASE_URL))
 				.build();
 	}
 
