@@ -13,3 +13,5 @@ User -> Posts
 - Retrieve all posts for a User - `GET /users/{id}/posts`
 - Create a Post for a User - `POST /users/{id}/posts`
 - Retrieve details of a Post - `GET /users/{id}/posts/{post_id}`
+
+28. Step 15 00 -Adding dependency for validation
