@@ -14,6 +14,8 @@ User -> Posts
 - Create a Post for a User - `POST /users/{id}/posts`
 - Retrieve details of a Post - `GET /users/{id}/posts/{post_id}`
 
-- HATEOS - Hypermedia as the Engine of Application State
-- 
-28. Step 15 00 -Adding dependency for validation
+- HATEOAS - Hypermedia as the Engine of Application State
+- Internationalization - i18n
+
+
+33. Step 19 - Context Negotiation - Implementing Support for XML
