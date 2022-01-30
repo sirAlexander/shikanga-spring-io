@@ -18,5 +18,4 @@ User -> Posts
 - Internationalization - i18n
 - HAL - JSON Hypertext Application Language
 
-
-36. Step 22 - Monitoring APIs with Spring Boot Actuator
+40. Step 26 - Versioning Restful services, basic approach with URI's
