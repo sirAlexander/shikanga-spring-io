@@ -18,4 +18,4 @@ User -> Posts
 - Internationalization - i18n
 
 
-33. Step 19 - Context Negotiation - Implementing Support for XML
+36. Step 22 - Monitoring APIs with Spring Boot Actuator
