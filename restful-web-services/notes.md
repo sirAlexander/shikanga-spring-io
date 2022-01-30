@@ -16,6 +16,7 @@ User -> Posts
 
 - HATEOAS - Hypermedia as the Engine of Application State
 - Internationalization - i18n
+- HAL - JSON Hypertext Application Language
 
 
 36. Step 22 - Monitoring APIs with Spring Boot Actuator
