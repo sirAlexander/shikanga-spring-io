@@ -1,4 +1,4 @@
-package com.example.monitoring;
+package com.codeboard.monitoring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
