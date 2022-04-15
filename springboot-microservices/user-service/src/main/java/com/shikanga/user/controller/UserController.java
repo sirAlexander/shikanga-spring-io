@@ -1,5 +1,6 @@
 package com.shikanga.user.controller;
 
+import com.shikanga.user.domain.UserResponse;
 import com.shikanga.user.entity.User;
 import com.shikanga.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +37,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User findUserById(@PathVariable("id") Long userId) {
-        log.info("Inside findUserById method of UserController");
-        return userService.findUserById(userId);
+    public UserResponse findUserWithDepartment(@PathVariable("id") Long userId) {
+        log.info("Inside findUserWithDepartment method of UserController");
+        return userService.findUserWithDepartment(userId);
     }
+
 }
