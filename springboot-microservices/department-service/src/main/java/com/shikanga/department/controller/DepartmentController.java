@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/departments")
 @Slf4j
@@ -21,10 +23,16 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Department saveDepartment(@RequestBody Department department){
         log.info("Inside saveDepartment method of DepartmentController");
         return departmentService.saveDepartment(department);
+    }
+
+    @GetMapping
+    public List<Department> findAllDepartments() {
+        log.info("Inside findAllDepartments method of DepartmentController");
+        return departmentService.findAllDepartments();
     }
 
     @GetMapping("/{id}")

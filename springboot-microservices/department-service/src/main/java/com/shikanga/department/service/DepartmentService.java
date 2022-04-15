@@ -5,6 +5,7 @@ import com.shikanga.department.repository.DepartmentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -26,5 +27,9 @@ public class DepartmentService {
         log.info("Inside findDepartmentById method of DepartmentService");
         return  departmentRepository.findById(departmentId)
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    public List<Department> findAllDepartments() {
+        return departmentRepository.findAll();
     }
 }
