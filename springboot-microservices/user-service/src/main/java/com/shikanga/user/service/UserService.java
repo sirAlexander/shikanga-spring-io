@@ -47,7 +47,7 @@ public class UserService {
 
     private UserResponse buildUserResponse(User user) {
         final Department department = restTemplate.getForObject(
-                "http://localhost:9001/departments/" + user.getDepartmentId(),
+                "http://DEPARTMENT-SERVICE/departments/" + user.getDepartmentId(),
                 Department.class);
         return UserResponse.builder()
                 .user(user)
