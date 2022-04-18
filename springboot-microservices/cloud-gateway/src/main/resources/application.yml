@@ -14,7 +14,7 @@ spring:
             - name: CircuitBreaker
               args:
                 name: USER-SERVICE
-                fallcaburi: forward:/userServiceFallBack
+                fallbackuri: forward:/userServiceFallBack
         - id: DEPARTMENT-SERVICE
           uri: lb://DEPARTMENT-SERVICE
           predicates:
@@ -23,7 +23,7 @@ spring:
             - name: CircuitBreaker
               args:
                 name: DEPARTMENT-SERVICE
-                fallcaburi: forward:/departmentServiceFallBack
+                fallbackuri: forward:/departmentServiceFallBack
 
 hystrix:
   command:
