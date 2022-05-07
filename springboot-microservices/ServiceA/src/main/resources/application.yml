@@ -26,3 +26,10 @@ resilience4j:
         permittedNumberOfCallsInHalsOpenState: 3
         slidingWindowSize: 10
         slidingWindowType: COUNT_BASED
+  retry:
+    instances:
+      service-A:
+        registerHealthIndicator: true
+        maxRetryAttempts: 5
+        waitDuration: 10s
+
