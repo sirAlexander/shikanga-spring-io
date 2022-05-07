@@ -2,6 +2,7 @@ package com.shikanga.service.a.controller;
 
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +25,12 @@ public class ServiceAController {
     }
 
     @GetMapping
-    //@CircuitBreaker(name = SERVICE_A, fallbackMethod = "serviceAFallback")
+    @CircuitBreaker(name = SERVICE_A, fallbackMethod = "serviceAFallback")
     @Retry(name = SERVICE_A)
+    @RateLimiter(name = SERVICE_A)
     public String serviceA(){
-        int count = 1;
         String url = SERVICE_B_BASE_URL + "/b";
-        System.out.println("Retry method called " + count++ + " times at " + new Date());
+        System.out.println("Retry method called at " + new Date());
         return restTemplate.getForObject(
                 url,
                 String.class
