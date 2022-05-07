@@ -21,12 +21,16 @@ public class ServiceAController {
     }
 
     @GetMapping
-    @CircuitBreaker(name = SERVICE_A)
+    @CircuitBreaker(name = SERVICE_A, fallbackMethod = "serviceAFallback")
     public String serviceA(){
         String url = SERVICE_B_BASE_URL + "/b";
         return restTemplate.getForObject(
                 url,
                 String.class
         );
+    }
+
+    public String serviceAFallback(Exception exception){
+        return "This is a fallback method for Service A";
     }
 }
